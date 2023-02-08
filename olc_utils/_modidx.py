@@ -5,4 +5,6 @@ d = { 'settings': { 'branch': 'main',
                 'doc_host': 'https://ankurdivekar.github.io',
                 'git_url': 'https://github.com/ankurdivekar/olc-utils',
                 'lib_path': 'olc_utils'},
-  'syms': {'olc_utils.neighborhood': {}}}
+  'syms': { 'olc_utils.grid': { 'olc_utils.grid.get_offset_gridchar': ('grid.html#get_offset_gridchar', 'olc_utils/grid.py'),
+                                'olc_utils.grid.get_olc_with_offsets': ('grid.html#get_olc_with_offsets', 'olc_utils/grid.py')},
+            'olc_utils.neighborhood': {}}}
