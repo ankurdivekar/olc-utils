@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "olc-utils"
+  site-url: "https://ankurdivekar.github.io/olc-utils"
+  description: "A set of utilities for Open Location Code usage"
+  repo-branch: main
+  repo-url: "https://github.com/ankurdivekar/olc-utils"
