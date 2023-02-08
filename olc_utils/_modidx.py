@@ -5,4 +5,4 @@ d = { 'settings': { 'branch': 'main',
                 'doc_host': 'https://ankurdivekar.github.io',
                 'git_url': 'https://github.com/ankurdivekar/olc-utils',
                 'lib_path': 'olc_utils'},
-  'syms': {'olc_utils.core': {'olc_utils.core.foo': ('core.html#foo', 'olc_utils/core.py')}}}
+  'syms': {'olc_utils.neighborhood': {}}}
