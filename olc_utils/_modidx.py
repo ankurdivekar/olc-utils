@@ -5,6 +5,8 @@ d = { 'settings': { 'branch': 'main',
                 'doc_host': 'https://ankurdivekar.github.io',
                 'git_url': 'https://github.com/ankurdivekar/olc-utils',
                 'lib_path': 'olc_utils'},
-  'syms': { 'olc_utils.grid': { 'olc_utils.grid.get_offset_gridchar': ('grid.html#get_offset_gridchar', 'olc_utils/grid.py'),
-                                'olc_utils.grid.get_olc_with_offsets': ('grid.html#get_olc_with_offsets', 'olc_utils/grid.py')},
-            'olc_utils.neighborhood': {}}}
+  'syms': { 'olc_utils.adjacent': {'olc_utils.adjacent.get_adjacent_grids': ('adjacent.html#get_adjacent_grids', 'olc_utils/adjacent.py')},
+            'olc_utils.grid': { 'olc_utils.grid.get_offset_gridchar': ('grid.html#get_offset_gridchar', 'olc_utils/grid.py'),
+                                'olc_utils.grid.get_olc_grid_centroid': ('grid.html#get_olc_grid_centroid', 'olc_utils/grid.py'),
+                                'olc_utils.grid.get_olc_with_offsets': ('grid.html#get_olc_with_offsets', 'olc_utils/grid.py'),
+                                'olc_utils.grid.get_valid_olc_code': ('grid.html#get_valid_olc_code', 'olc_utils/grid.py')}}}
