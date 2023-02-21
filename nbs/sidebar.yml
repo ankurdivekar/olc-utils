@@ -3,4 +3,5 @@ website:
     contents:
       - index.ipynb
       - 00_grid.ipynb
-      - 01_neighborhood.ipynb
+      - 01_adjacent.ipynb
+      - 02_sweep.ipynb

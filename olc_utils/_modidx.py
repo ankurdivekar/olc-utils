@@ -9,4 +9,7 @@ d = { 'settings': { 'branch': 'main',
             'olc_utils.grid': { 'olc_utils.grid.get_offset_gridchar': ('grid.html#get_offset_gridchar', 'olc_utils/grid.py'),
                                 'olc_utils.grid.get_olc_grid_centroid': ('grid.html#get_olc_grid_centroid', 'olc_utils/grid.py'),
                                 'olc_utils.grid.get_olc_with_offsets': ('grid.html#get_olc_with_offsets', 'olc_utils/grid.py'),
-                                'olc_utils.grid.get_valid_olc_code': ('grid.html#get_valid_olc_code', 'olc_utils/grid.py')}}}
+                                'olc_utils.grid.get_valid_olc_code': ('grid.html#get_valid_olc_code', 'olc_utils/grid.py')},
+            'olc_utils.sweep': { 'olc_utils.sweep.get_max_min_chars': ('sweep.html#get_max_min_chars', 'olc_utils/sweep.py'),
+                                 'olc_utils.sweep.get_right_diagonal_vertex_grids': ( 'sweep.html#get_right_diagonal_vertex_grids',
+                                                                                      'olc_utils/sweep.py')}}}

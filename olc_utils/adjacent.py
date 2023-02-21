@@ -13,20 +13,17 @@ from typing import Tuple
 def get_adjacent_grids(
     olc_code:str, # OLC code to get the neighbours of
     radius:int=1, # Radius of the grid to get the neighbours of (default 1) 
-    )->Tuple[str]: # Tuple of 8 OLC codes, starting from the NW corner and going clockwise
-    # Get the 8 neighbours of a given OLC code grid, starting from the NW corner and going clockwise
-    
+    ) -> Tuple[str]: # Tuple of 8 OLC codes, starting from the NW corner and going clockwise
     if olc_code is None:
         return None
-    else:
-        #TODO: implement radius based logic
-        NW = get_olc_with_offsets(olc_code, 1, -1)
-        N = get_olc_with_offsets(olc_code, 1, 0)
-        NE = get_olc_with_offsets(olc_code, 1, 1)
-        E = get_olc_with_offsets(olc_code, 0, 1)
-        SE = get_olc_with_offsets(olc_code, -1, 1)
-        S = get_olc_with_offsets(olc_code, -1, 0)
-        SW = get_olc_with_offsets(olc_code, -1, -1)
-        W = get_olc_with_offsets(olc_code, 0, -1)
-        
-        return NW, N, NE, E, SE, S, SW, W
+    #TODO: implement radius based logic
+    NW = get_olc_with_offsets(olc_code, 1, -1)
+    N = get_olc_with_offsets(olc_code, 1, 0)
+    NE = get_olc_with_offsets(olc_code, 1, 1)
+    E = get_olc_with_offsets(olc_code, 0, 1)
+    SE = get_olc_with_offsets(olc_code, -1, 1)
+    S = get_olc_with_offsets(olc_code, -1, 0)
+    SW = get_olc_with_offsets(olc_code, -1, -1)
+    W = get_olc_with_offsets(olc_code, 0, -1)
+
+    return NW, N, NE, E, SE, S, SW, W

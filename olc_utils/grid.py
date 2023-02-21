@@ -30,8 +30,7 @@ def get_valid_olc_code(
 def get_olc_grid_centroid(
     olc_code: str   # OLC code to get centroid for
     ) -> Tuple[float, float]: # Latitude and longitude of centroid
-    olc_code = get_valid_olc_code(olc_code)
-    if olc_code:
+    if olc_code := get_valid_olc_code(olc_code):
         g = olc.decode(olc_code)
         return g.latitudeCenter, g.longitudeCenter
     return None, None
@@ -41,82 +40,61 @@ def get_offset_gridchar(
     start: int,  # The starting character
     offset: int,  # The number of steps to take from the starting character
 ) -> Tuple[str, int]:  # The new character and the number of wraparounds
-    gridseq = [
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "C",
-        "F",
-        "G",
-        "H",
-        "J",
-        "M",
-        "P",
-        "Q",
-        "R",
-        "V",
-        "W",
-        "X",
-    ]
+    gridseq = olc.CODE_ALPHABET_
+    # ["2", "3", "4", "5", "6", "7","8","9","C","F","G","H","J","M","P","Q","R","V","W","X"]
+
     if start not in gridseq:
         return None
+    start_idx = gridseq.index(start)
+    wraparounds = int((offset / abs(offset)) * (abs(offset) // len(gridseq)))
+    local_offset = int((offset / abs(offset)) * (abs(offset) % len(gridseq)))
+
+    # print(start_idx, wraparounds, local_offset)
+
+    if start_idx + local_offset < 0:
+        return gridseq[start_idx + local_offset + len(gridseq)], wraparounds - 1
+
+    elif start_idx + local_offset > len(gridseq) - 1:
+        return gridseq[start_idx + local_offset - len(gridseq)], wraparounds + 1
+
     else:
-        start_idx = gridseq.index(start)
-        wraparounds = int((offset / abs(offset)) * (abs(offset) // len(gridseq)))
-        local_offset = int((offset / abs(offset)) * (abs(offset) % len(gridseq)))
-
-        # print(start_idx, wraparounds, local_offset)
-
-        if start_idx + local_offset < 0:
-            return gridseq[start_idx + local_offset + len(gridseq)], wraparounds - 1
-
-        elif start_idx + local_offset > len(gridseq) - 1:
-            return gridseq[start_idx + local_offset - len(gridseq)], wraparounds + 1
-
-        else:
-            return gridseq[start_idx + local_offset], wraparounds
+        return gridseq[start_idx + local_offset], wraparounds
 
 # %% ../nbs/00_grid.ipynb 12
 def get_olc_with_offsets(
     # Get the OLC code for the grid at specified separation from the given grid
-    olc_code:str,       # Open location code grid id
-    v_offset:int=0,     # Vertical offset to be applied to the grid id
-    h_offset:int=0      # Horizontal offset to be applied to the grid id
-    )-> str:            # The new grid id after applying offsets
+    olc_code: str,  # Open location code grid id
+    v_offset: int = 0,  # Vertical offset to be applied to the grid id
+    h_offset: int = 0,  # Horizontal offset to be applied to the grid id
+) -> str:  # The new grid id after applying offsets
     if olc_code is None:
         return None
-    else:
-        # Split the OLC code into its component parts.
-        olc_code = ''.join(olc_code.split("+"))
-        olc_components = [olc_code[i:i+2] for i in range(0, len(olc_code), 2)]
-        # print(olc_components)
-        
-        component_pointer = len(olc_components)
-        wraparound = True
-        
-        while wraparound:
-            component_pointer -= 1
-            component = olc_components[component_pointer]
-            v_char = component[0]
-            h_char = component[1]
-            
-            if v_offset != 0:
-                v_char, v_offset = get_offset_gridchar(component[0], v_offset)
-            if h_offset != 0:
-                h_char, h_offset = get_offset_gridchar(component[1], h_offset)
-            
-            new_component = v_char + h_char
-            olc_components[component_pointer] = new_component
-            wraparound = v_offset != 0 or h_offset != 0
-        
-        if len(olc_components) > 4:
-            olc_code = ''.join(olc_components[:4]) + '+' + ''.join(olc_components[4:])
-        else:
-            olc_code = ''.join(olc_components)
-            
-        return olc_code
+
+    # Split the OLC code into its component parts.
+    olc_code = "".join(olc_code.split("+"))
+    olc_components = [olc_code[i : i + 2] for i in range(0, len(olc_code), 2)]
+    # print(olc_components)
+
+    component_pointer = len(olc_components)
+    wraparound = True
+
+    while wraparound:
+        component_pointer -= 1
+        component = olc_components[component_pointer]
+        v_char = component[0]
+        h_char = component[1]
+
+        if v_offset != 0:
+            v_char, v_offset = get_offset_gridchar(component[0], v_offset)
+        if h_offset != 0:
+            h_char, h_offset = get_offset_gridchar(component[1], h_offset)
+
+        new_component = v_char + h_char
+        olc_components[component_pointer] = new_component
+        wraparound = v_offset != 0 or h_offset != 0
+
+    return (
+        "".join(olc_components[:4]) + "+" + "".join(olc_components[4:])
+        if len(olc_components) > 4
+        else "".join(olc_components)
+    )
