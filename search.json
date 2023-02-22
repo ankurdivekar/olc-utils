@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "olc-utils",
+    "section": "",
+    "text": "pip install olc_utils"
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "olc-utils",
+    "section": "How to use",
+    "text": "How to use\nYou can get the 8 adjacent neighbours of any valid OLC grid id\n\nget_adjacent_grids(\"7JCMHQ9C\")\n\n('7JCMHQC9',\n '7JCMHQCC',\n '7JCMHQCF',\n '7JCMHQ9F',\n '7JCMHQ8F',\n '7JCMHQ8C',\n '7JCMHQ89',\n '7JCMHQ99')"
+  },
+  {
+    "objectID": "sweep.html",
+    "href": "sweep.html",
+    "title": "sweep",
+    "section": "",
+    "text": "Given a string of characters representing X or Y characters of two OLC grids, find the characters of max and min grid\n\nsource\n\nget_max_min_chars\n\n get_max_min_chars (str1:str, str2:str)\n\n\ntest_eq(get_max_min_chars(\"856X\", \"8W6V\"), (\"8W6V\", \"856X\"))\ntest_eq(get_max_min_chars(\"8W44\", \"8W3X\"), (\"8W44\", \"8W3X\"))\n\nGiven two OLC grids, find the 4 corner grids in the rectangle defined by the two grids\n\nsource\n\n\nget_four_corner_grids\n\n get_four_corner_grids (grid1:str, grid2:str)\n\n\ntest_eq(\n    get_four_corner_grids(\"9G2242WJ\", \"9G2242PW\"), ('9G2242PJ', '9G2242WJ', '9G2242WW', '9G2242PW')\n)\ntest_eq(\n    get_four_corner_grids('9G2542WW', \"9X2242PJ\"), ('9G2542PW', '9G2542WW', '9X2242WJ', '9X2242PJ')\n)\n\nGiven two OLC grids, get all OLC grids in the rectangle formed between them\n\nsource\n\n\nget_all_olc_between_grids\n\n get_all_olc_between_grids (grid1:str, grid2:str)\n\n\nolc_list = get_all_olc_between_grids(\"9G2242WJ\", \"9G225322\")\nprint(len(olc_list))\ndisplay(olc_list)\n\n27\n\n\n['9G2242WJ',\n '9G2242WM',\n '9G2242WP',\n '9G2242WQ',\n '9G2242WR',\n '9G2242WV',\n '9G2242WW',\n '9G2242WX',\n '9G2243W2',\n '9G2242XJ',\n '9G2242XM',\n '9G2242XP',\n '9G2242XQ',\n '9G2242XR',\n '9G2242XV',\n '9G2242XW',\n '9G2242XX',\n '9G2243X2',\n '9G22522J',\n '9G22522M',\n '9G22522P',\n '9G22522Q',\n '9G22522R',\n '9G22522V',\n '9G22522W',\n '9G22522X',\n '9G225322']"
+  },
+  {
+    "objectID": "grid.html",
+    "href": "grid.html",
+    "title": "grid",
+    "section": "",
+    "text": "Basic OLC validation\n\nsource\n\nget_flat_olc_code\n\n get_flat_olc_code (olc_code:str)\n\n\n\n\n\nType\nDetails\n\n\n\n\nolc_code\nstr\nOLC code to convert\n\n\nReturns\nstr\nValid OLC code without the +\n\n\n\n\nsource\n\n\nget_valid_olc_code\n\n get_valid_olc_code (olc_code:str)\n\n\n\n\n\nType\nDetails\n\n\n\n\nolc_code\nstr\nOLC code to validate\n\n\nReturns\nstr\nValid OLC code or None\n\n\n\n\nget_valid_olc_code(\"9G7V8V8V8VX\")\n\n'9G7V8V8V+8VX'\n\n\nOLC Coordinates\n\nsource\n\n\nget_olc_grid_centroid\n\n get_olc_grid_centroid (olc_code:str)\n\n\n\n\n\n\n\n\n\n\nType\nDetails\n\n\n\n\nolc_code\nstr\nOLC code to get centroid for\n\n\nReturns\ntyping.Tuple[float, float]\nLatitude and longitude of centroid\n\n\n\n\nget_olc_grid_centroid('22VVHQMX+')\n\n(-72.41625, -162.20125)\n\n\nGrid code string operations\n\nsource\n\n\nxy_chars_to_olc\n\n xy_chars_to_olc (x_chars:str, y_chars:str)\n\n\nsource\n\n\nolc_to_xy_chars\n\n olc_to_xy_chars (grid:str)\n\nGrid code arithmetic operations\n\nsource\n\n\nolc_to_decimal\n\n olc_to_decimal (grid)\n\n\ntest_eq(olc_to_decimal(\"8FWF6MVX\"), 8315077559)\n\n\nsource\n\n\ndecimal_to_olc\n\n decimal_to_olc (decimal)\n\n\ntest_eq(decimal_to_olc(8315077559), \"8FWF6MVX\")\n\nGrid offset operations\n\nsource\n\n\nget_offsets_between_grids\n\n get_offsets_between_grids (grid1:str, grid2:str)\n\n\ntest_eq(get_offsets_between_grids(\"9G2243V3\", \"9G2242XJ\"), (-9, 2))\ntest_eq(get_offsets_between_grids(\"9G2242XJ\", \"9G2243V3\"), (9, -2))\n\n\nsource\n\n\nget_olc_with_offsets\n\n get_olc_with_offsets (grid:str, x_offset:int, y_offset:int)\n\n\n# Testing grids at various resolutions\ntest_eq(get_olc_with_offsets(\"9G2243V3\", -9, 2), '9G2242XJ')\ntest_eq(get_olc_with_offsets('7JCMHQ', -1, -1), '7JCMGP')\ntest_eq(get_olc_with_offsets('7JCMHQ9C+2W', 0, 0), '7JCMHQ9C2W')\ntest_eq(get_olc_with_offsets('84VVHQMX', -1, -1), '84VVHQJW')\ntest_eq(get_olc_with_offsets('7JCMHQ9C2W', 1, 1), '7JCMHQ9C3X')\ntest_eq(get_olc_with_offsets('7JCMHQ9C+2W', -1, -1), '7JCMHQ8CXV')"
+  },
+  {
+    "objectID": "adjacent.html",
+    "href": "adjacent.html",
+    "title": "adjacent",
+    "section": "",
+    "text": "source\n\nget_adjacent_grids\n\n get_adjacent_grids (grid:str, radius:int=1)\n\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\ngrid\nstr\n\nOLC code to get the neighbours of\n\n\nradius\nint\n1\nRadius of the grid to get the neighbours of (default 1)\n\n\nReturns\ntyping.Tuple[str]\n\n\n\n\n\n\nget_adjacent_grids(grid=\"7JCMHQ9C\")\n\n('7JCMHQC9',\n '7JCMHQCC',\n '7JCMHQCF',\n '7JCMHQ9F',\n '7JCMHQ8F',\n '7JCMHQ8C',\n '7JCMHQ89',\n '7JCMHQ99')\n\n\n\nsource\n\n\nget_grids_within_radius\n\n get_grids_within_radius (grid:str, radius:int=1)\n\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\ngrid\nstr\n\nOLC code to get the neighbours of\n\n\nradius\nint\n1\nRadius of the grid to get the neighbours of (default 1)\n\n\nReturns\ntyping.Tuple[str]\n\nTuple of OLC codes within radius\n\n\n\n\nall_grids = get_grids_within_radius(\"7JCMHQ9C\", radius=3)\nprint(len(all_grids))\nprint(all_grids)\n\n25\n['7JCMHQ6C', '7JCMHQ79', '7JCMHQ7C', '7JCMHQ7F', '7JCMHQ88', '7JCMHQ89', '7JCMHQ8C', '7JCMHQ8F', '7JCMHQ8G', '7JCMHQ97', '7JCMHQ98', '7JCMHQ99', '7JCMHQ9C', '7JCMHQ9F', '7JCMHQ9G', '7JCMHQ9H', '7JCMHQC8', '7JCMHQC9', '7JCMHQCC', '7JCMHQCF', '7JCMHQCG', '7JCMHQF9', '7JCMHQFC', '7JCMHQFF', '7JCMHQGC']"
+  }
+]
