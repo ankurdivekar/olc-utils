@@ -14,7 +14,7 @@ pip install olc_utils
 You can get the 8 adjacent neighbours of any valid OLC grid id
 
 ``` python
-get_adjacent_grids('7JCMHQ9C')
+get_adjacent_grids("7JCMHQ9C")
 ```
 
     ('7JCMHQC9',
