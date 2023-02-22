@@ -17,13 +17,13 @@ def get_adjacent_grids(
     if olc_code is None:
         return None
     #TODO: implement radius based logic
-    NW = get_olc_with_offsets(olc_code, 1, -1)
-    N = get_olc_with_offsets(olc_code, 1, 0)
+    NW = get_olc_with_offsets(olc_code, -1, 1)
+    N = get_olc_with_offsets(olc_code, 0, 1)
     NE = get_olc_with_offsets(olc_code, 1, 1)
-    E = get_olc_with_offsets(olc_code, 0, 1)
-    SE = get_olc_with_offsets(olc_code, -1, 1)
-    S = get_olc_with_offsets(olc_code, -1, 0)
+    E = get_olc_with_offsets(olc_code, 1, 0)
+    SE = get_olc_with_offsets(olc_code, 1, -1)
+    S = get_olc_with_offsets(olc_code, 0, -1,)
     SW = get_olc_with_offsets(olc_code, -1, -1)
-    W = get_olc_with_offsets(olc_code, 0, -1)
+    W = get_olc_with_offsets(olc_code, -1, 0)
 
     return NW, N, NE, E, SE, S, SW, W
